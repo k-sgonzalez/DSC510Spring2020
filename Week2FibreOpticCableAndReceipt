@@ -1,0 +1,33 @@
+"""
+File: DSC510_T303 Week2 Programming Assignment
+Name: Kim Gonzalez
+Date: 13MARCH2020
+Course: DSC510-T303 Introduction to Programming
+Desc: Program calculates quantity and costs of fiber optic cable needed by customer
+        and prints receipt.
+In: Company name from user, number of feet of fiber optic cable needed
+Out: Receipt for user to include:
+        company name
+        number of feet of fiber to be installed
+        calculated cost (num of feet  * $0.87) in legible format
+Include appropriate comments throughout program
+"""
+
+
+welcome = "Welcome to Fiber Optics Emporium!"
+print(welcome)
+companyName = input("Please provide your company name.\n")
+customizedGreeting = "Thank you " + companyName + "!"
+fibreOpticNeeded = input("Please provide the quantity (in ft) of fiber optic cable to be installed.")
+print("Thank you! Please wait while we calculate costs.\n")
+cost = float(fibreOpticNeeded) * 0.89
+receipt = f"""
+
+Invoice #23456:
+        Thank you {companyName}!
+        The num. of ft of Fiber Optic cable to be installed is {fibreOpticNeeded}.
+        Total for installation is ${cost}
+        Thank you for contacting Fiber Optics Emporium!
+        """
+print(receipt)
+
