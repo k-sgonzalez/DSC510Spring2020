@@ -1,0 +1,48 @@
+"""
+File DSC510_T303 Week 10 Programming Assignment
+Name: Kim Gonzalez
+Date: 18May2020
+Course: DSC510_T303 Intro to Python Programming
+Details:
+
+-Create a program which uses the Request library to make a GET request of the following API: Chuck Norris Jokes.
+-The program will receive a JSON response which includes various pieces of data. You should parse the JSON data to
+obtain the “value” key. The data associated with the value key should be displayed for the user (i.e., the joke).
+-Your program should allow the user to request a Chuck Norris joke as many times as they would like. You should make
+sure that your program does error checking at this point. If you ask the user to enter “Y” and they enter y, is that
+ok? Does it fail? If it fails, display a message for the user. There are other ways to handle this.
+Think about included string functions you might be able to call.
+-Your program must include a header as in previous weeks.
+-Your program must include a welcome message for the user.
+-Your program must generate “pretty” output.
+"""
+import requests
+
+def populate_joke():
+    url = 'https://api.chucknorris.io/jokes/random'
+    try:
+        joke_return = requests.get(url, timeout=2)
+        joke_json = joke_return.json()
+        print(joke_json["value"])
+        joke_return.raise_for_status()
+    except requests.exceptions.RequestException:
+        print("OOPS! Something went wrong! Try again")
+        populate_joke()
+    return
+
+def main():
+    welcome = input("Welcome to the Chuck Norris joke finder!\n Type 'Go' to hear a joke.\n")
+    if welcome == 'Go' or 'go':
+        print("Loading...")
+        populate_joke()
+        another_joke = input("Would you like to hear another joke? Type 'Y'\n")
+        while another_joke == 'Y' or another_joke == 'y':
+            print("Loading.....")
+            populate_joke()
+            another_joke = input("Would you like to hear another joke? Type 'Y'\n")
+            if another_joke != 'Y' or 'y':
+                break
+        print("Thanks for the laughs! See you later!")
+    return
+
+main()
